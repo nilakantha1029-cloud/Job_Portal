@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RozgarSetu - Smart Job Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a class="brand" href="#">Dream<span>Job</span></a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#jobs">Jobs</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#saved" class="nav-saved">Saved <span id="savedBadge" class="badge hidden">0</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">🇮🇳 India's Smartest Job Portal</div>
+    <h1>Find Your <span class="accent">Dream Job</span><br>Before Someone Else Does</h1>
+    <p>Connecting talented individuals with the right opportunities across India.</p>
+    <div class="hero-actions">
+      <a href="#jobs" class="btn-primary">Browse Jobs <span>→</span></a>
+      <a href="#about" class="btn-ghost">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong id="statJobs">0</strong><span>Live Jobs</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><strong>4.8★</strong><span>User Rating</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><strong>3 Cities</strong><span>Pan India</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOB SECTION -->
+<section id="jobs" class="jobs-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Available <span class="accent">Positions</span></h2>
+      <p id="resultsCount">Loading jobs...</p>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters-panel">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Search by title, company, skill...">
+        <button class="clear-input" id="clearSearch" title="Clear search">✕</button>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>📍 Location</label>
+          <select id="locationFilter">
+            <option value="">All Locations</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Pune">Pune</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>🎯 Experience</label>
+          <select id="experienceFilter">
+            <option value="">All Levels</option>
+            <option value="Fresher">Fresher (0-1 yr)</option>
+            <option value="Mid">Mid (2-5 yrs)</option>
+            <option value="Senior">Senior (5+ yrs)</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>🏷️ Category</label>
+          <select id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="Technology">Technology</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Design">Design</option>
+            <option value="Finance">Finance</option>
+            <option value="HR">HR</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>💰 Salary Range</label>
+          <select id="salaryFilter">
+            <option value="">Any Salary</option>
+            <option value="0-5">Up to 5 LPA</option>
+            <option value="5-10">5–10 LPA</option>
+            <option value="10-999">10+ LPA</option>
+          </select>
+        </div>
+
+        <button class="btn-clear" onclick="clearFilters()">Reset Filters</button>
+      </div>
+
+      <!-- Active filters -->
+      <div class="active-filters" id="activeFilters"></div>
+    </div>
+
+    <!-- Sort bar -->
+    <div class="sort-bar">
+      <span>Sort by:</span>
+      <button class="sort-btn active" data-sort="default">Newest</button>
+      <button class="sort-btn" data-sort="salary-asc">Salary ↑</button>
+      <button class="sort-btn" data-sort="salary-desc">Salary ↓</button>
+      <button class="sort-btn" data-sort="title">A–Z Title</button>
+    </div>
+
+    <!-- Job Grid -->
+    <div class="job-grid" id="jobContainer"></div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination"></div>
+
+    <!-- Empty state -->
+    <div class="empty-state hidden" id="emptyState">
+      <div class="empty-icon">🔍</div>
+      <h3>No jobs found</h3>
+      <p>Try adjusting your filters or search terms.</p>
+      <button class="btn-primary" onclick="clearFilters()">Clear All Filters</button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about-section">
+  <div class="section-container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-tag">About Us</div>
+        <h2>Bridging the Gap Between <span class="accent">Talent & Opportunity</span></h2>
+        <p>RozgarSetu is India's smartest job portal, built with the mission to help job seekers find the right opportunities fast. We leverage smart filtering, real-time data and a clean interface to make job hunting less stressful.</p>
+        <div class="about-features">
+          <div class="feature-item">✅ Verified job listings</div>
+          <div class="feature-item">✅ Smart filters & search</div>
+          <div class="feature-item">✅ Save & track jobs</div>
+          <div class="feature-item">✅ Mobile-first design</div>
+        </div>
+      </div>
+      <div class="about-cards">
+        <div class="stat-card"><h3>500+</h3><p>Job Listings</p></div>
+        <div class="stat-card accent-card"><h3>10k+</h3><p>Job Seekers</p></div>
+        <div class="stat-card"><h3>200+</h3><p>Companies</p></div>
+        <div class="stat-card accent-card"><h3>85%</h3><p>Placement Rate</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="contact-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Get in <span class="accent">Touch</span></h2>
+      <p>Have questions or want to list your jobs? We'd love to hear from you.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item"><span>📧</span><div><strong>Email</strong><p>support.dreamjob00@gmail.in</p></div></div>
+        <div class="contact-item"><span>📞</span><div><strong>Phone</strong><p>+91 98765 43210</p></div></div>
+        <div class="contact-item"><span>📍</span><div><strong>Office</strong><p>Pune , Maharashtra</p></div></div>
+      </div>
+      <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+        </div>
+        <input type="text" placeholder="Subject">
+        <textarea rows="4" placeholder="Your Message..." required></textarea>
+        <button type="submit" class="btn-primary">Send Message <span>→</span></button>
+        <div class="form-success hidden" id="formSuccess">✅ Message sent! We'll get back to you soon.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- SAVED JOBS -->
+<section id="saved" class="saved-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Saved <span class="accent">Jobs</span></h2>
+      <p>Your personal job shortlist.</p>
+    </div>
+    <div class="job-grid" id="savedContainer"></div>
+    <div class="empty-state hidden" id="savedEmpty">
+      <div class="empty-icon">🔖</div>
+      <h3>No saved jobs yet</h3>
+      <p>Click "Save" on any job card to bookmark it here.</p>
+      <a href="#jobs" class="btn-primary">Explore Jobs</a>
+    </div>
+  </div>
+</section>
+
+<!-- JOB DETAIL MODAL -->
+<div class="modal-overlay hidden" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div class="brand">Dream<span>Job</span></div>
+      <p>Connecting talent with opportunity across India.</p>
+    </div>
+    <div class="footer-copy">© 2026 DreamJob | Built with ❤️ in India</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
