@@ -95,7 +95,7 @@ Useful functions to extend:
 
 ## Author
 
-Your Name — replace with your real name or handle
+Your Name — Y Nilakantha
 
 GitHub: https://github.com/nilakantha1029-cloud
 
